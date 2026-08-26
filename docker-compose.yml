@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./apps/backend
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:admin@host.docker.internal:5432/control_gastos?schema=public
+      - JWT_SECRET=cambia_este_valor_por_uno_seguro
+      - JWT_EXPIRES_IN=1d
+      - PORT=3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    build:
+      context: ./apps/frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
