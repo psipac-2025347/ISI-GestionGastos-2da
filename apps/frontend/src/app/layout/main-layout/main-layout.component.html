@@ -1,0 +1,12 @@
+<div class="app-shell">
+  <app-sidebar></app-sidebar>
+
+  <div class="app-main">
+    <div class="topbar">
+      <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+    </div>
+    <main class="app-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

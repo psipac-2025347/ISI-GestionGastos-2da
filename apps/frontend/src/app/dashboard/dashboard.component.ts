@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { TokenService } from '../core/services/token.service';
+
+interface Movimiento {
+  descripcion: string;
+  fecha: string;
+  monto: number;
+  tipo: 'ingreso' | 'gasto';
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +15,15 @@ import { TokenService } from '../core/services/token.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  constructor(private tokenService: TokenService, private router: Router) {}
+  sueldoFijo = 0;
+  sueldoVariable = 0;
+  ingresosExtra = 0;
 
-  logout(): void {
-    this.tokenService.removeToken();
-    this.router.navigate(['/login']);
-  }
+  movimientos: Movimiento[] = [
+    { descripcion: 'Sueldo Fijo', fecha: '19 Ago 2026', monto: 150, tipo: 'gasto' },
+    { descripcion: 'Sueldo Variable', fecha: '16 Ago 2026', monto: 50, tipo: 'gasto' },
+    { descripcion: 'Ingreso extra', fecha: '17 Ago 2026', monto: 180, tipo: 'gasto' },
+    { descripcion: 'Sueldo Fijo', fecha: '15 Ago 2026', monto: 3800, tipo: 'ingreso' },
+    { descripcion: 'Sueldo Variable', fecha: '14 Ago 2026', monto: 75, tipo: 'gasto' },
+  ];
 }
