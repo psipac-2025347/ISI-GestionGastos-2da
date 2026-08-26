@@ -1,42 +1,84 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 .sidebar {
-  width: 220px;
-  min-width: 220px;
-  background: #F5F5F5;
+  width: 250px;
+  height: 100vh;
+  background-color: #e0e0e0;
+  border-right: 2px solid #b0b0b0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem 1rem;
+  box-sizing: border-box;
 }
 
+/* Logo ISI transparente ajustado */
 .sidebar-logo {
-  max-width: 140px;
   width: 100%;
+  max-width: 220px;
   height: auto;
-  margin-bottom: 2rem;
+  object-fit: contain;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  padding: 0 10px;
+  background-color: transparent;
+  border: none;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 .sidebar-nav {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  gap: 1.5rem;
 }
 
 .nav-item {
-  text-decoration: none;
-  color: #2B2B2B;
-  font-weight: 600;
-  text-align: center;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  color: #000000;
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #000000;
+  transition: background-color 0.2s ease;
 }
 
-.nav-item:hover {
-  color: #2E7D32;
-}
-
+.nav-item:hover,
 .nav-item.active {
-  color: #2E7D32;
-  border-bottom-color: #2B2B2B;
+  background-color: #d0d0d0;
+}
+
+/* Íconos vectoriales / PNG alineados a la izquierda */
+.nav-item::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* 1. Menu -> Casa */
+.nav-item:nth-child(1)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234CAF50'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
+}
+
+.nav-item:nth-child(2)::before {
+  background-image: url("/images/icons/sueldo-fijo.png");
+}
+.nav-item:nth-child(3)::before {
+  background-image: url("/images/icons/sueldo-extra.png");
+  filter: grayscale(100%);
+}
+.nav-item:nth-child(4)::before {
+  background-image: url("/images/icons/sueldo-extra.png");
+}
+.nav-item:nth-child(5)::before {
+  background-image: url("/images/icons/Fondo-Emergencia.png");
 }

@@ -1,141 +1,262 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --- RESUMEN HEADER --- */
 .resumen-header {
   display: flex;
   justify-content: center;
-  padding-top: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 25px;
 }
 
 .resumen-header h2 {
-  background-color: #4CAF50;
-  color: #1B5E20;
-  padding: 0.6rem 3rem;
-  border: 2px solid #B71C1C;
-  border-radius: 6px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  background-color: #7cb342;
+  color: #000000;
+  border: 2px solid #b71c1c;
+  padding: 6px 60px;
   margin: 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
+/* --- TARJETAS SUPERIORES --- */
 .summary-cards {
   display: flex;
-  gap: 1.5rem;
   justify-content: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
 }
 
 .summary-card {
   background-color: #ffffff;
-  border-radius: 10px;
-  padding: 1.5rem;
-  width: 180px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 20px 15px;
+  width: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Bordes superior e inferior */
+.summary-card:nth-child(1),
+.summary-card:nth-child(3) {
+  border-top: 5px solid #4CAF50;
+  border-bottom: 5px solid #4CAF50;
+}
+
+.summary-card:nth-child(2) {
+  border-top: 5px solid #000000;
+  border-bottom: 5px solid #000000;
+}
+
+/* --- ESTILOS PARA LOS ÍCONOS PNG EN TARJETAS --- */
+.card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #4CAF50;
+  padding: 8px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+/* Ajuste tonal/estilo para el ícono de la tarjeta central (Sueldo Variable) */
+.card-icon.variable-icon {
+  border-color: #000000;
+  filter: grayscale(100%);
 }
 
 .card-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #2B2B2B;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #000000;
+  margin: 0 0 8px 0;
+  text-align: center;
   letter-spacing: 0.5px;
-  margin-bottom: 0.5rem;
+}
+
+/* Línea separadora horizontal debajo del título */
+.card-label::after {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 6px auto 0 auto;
+  border-radius: 2px;
+}
+
+.summary-card:nth-child(1) .card-label::after,
+.summary-card:nth-child(3) .card-label::after {
+  background-color: #4CAF50;
+}
+
+.summary-card:nth-child(2) .card-label::after {
+  background-color: #000000;
 }
 
 .card-value {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #2E7D32;
-  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 6px 0 0 0;
+  text-align: center;
 }
 
+.summary-card:nth-child(1) .card-value,
+.summary-card:nth-child(3) .card-value {
+  color: #4CAF50;
+}
+
+.summary-card:nth-child(2) .card-value {
+  color: #000000;
+}
+
+/* --- PANEL DE MOVIMIENTOS RECIENTES --- */
 .movements-panel {
   background-color: #ffffff;
-  border: 3px solid #B71C1C;
-  border-radius: 10px;
-  max-width: 600px;
-  margin: 0 auto;
+  border: 3px solid #b71c1c;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 20px auto;
   overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .movements-header {
-  background-color: #B71C1C;
-  color: white;
-  font-weight: 700;
-  padding: 0.8rem 1.2rem;
+  background-color: #b71c1c;
+  color: #ffffff;
+  padding: 8px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.add-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
 }
 
 .movements-list {
-  padding: 0.5rem 1.2rem;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffffff;
 }
 
 .movement-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 42px 32px 1fr 100px;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+  border-bottom: 1px dashed #e0e0e0;
 }
 
 .movement-item:last-child {
   border-bottom: none;
 }
 
+.movement-item::before {
+  content: '';
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid #4CAF50;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-self: start;
+}
+
+.movement-item:nth-child(3n+1)::before {
+  background-image: url("/images/icons/sueldo-fijo.png");
+}
+
+.movement-item:nth-child(3n+2)::before {
+  background-image: url("/images/icons/sueldo-extra.png");
+  filter: grayscale(100%);
+}
+
+.movement-item:nth-child(3n+3)::before {
+  background-image: url("/images/icons/sueldo-extra.png");
+}
+
 .movement-icon {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #4CAF50;
-  color: #4CAF50;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.movement-icon.up {
+  background-color: #e8f5e9;
+  color: #2e7d32;
 }
 
 .movement-icon.down {
-  border-color: #B71C1C;
-  color: #B71C1C;
+  background-color: #ffebee;
+  color: #c62828;
 }
 
 .movement-desc {
-  flex: 1;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #2B2B2B;
+  color: #333333;
 }
 
 .movement-date {
-  color: #9E9E9E;
-  font-size: 0.85rem;
-}
-
-.movement-amount {
-  font-weight: 700;
-  min-width: 90px;
+  font-size: 0.8rem;
+  color: #757575;
   text-align: right;
 }
 
+.movement-amount {
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: right;
+  grid-column: 4;
+}
+
 .movement-amount.positive {
-  color: #2E7D32;
+  color: #2e7d32;
 }
 
 .movement-amount.negative {
-  color: #B71C1C;
+  color: #b71c1c;
 }
 
+/* --- FOOTER --- */
 .dashboard-footer {
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
-  color: #9E9E9E;
-  margin-top: 2rem;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.85rem;
+  padding: 15px 0 5px 0;
 }
 
-.dashboard-footer .footer-links a {
-  color: #9E9E9E;
-  text-decoration: none;
-  margin: 0 0.2rem;
+.footer-links a {
+  color: #ffffff;
+  text-decoration: underline;
 }
