@@ -189,8 +189,7 @@
 }
 
 .movement-item:nth-child(3n+2)::before {
-  background-image: url("/images/icons/sueldo-extra.png");
-  filter: grayscale(100%);
+  background-image: url("/images/icons/Ingreso-Variable.png");
 }
 
 .movement-item:nth-child(3n+3)::before {
