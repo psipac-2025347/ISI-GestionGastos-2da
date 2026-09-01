@@ -3,7 +3,7 @@ services:
     build:
       context: ./apps/backend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - DATABASE_URL=postgresql://postgres:admin@host.docker.internal:5432/control_gastos?schema=public
       - JWT_SECRET=cambia_este_valor_por_uno_seguro
