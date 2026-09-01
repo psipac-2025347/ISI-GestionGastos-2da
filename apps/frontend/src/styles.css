@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Configuración global y reseteo de márgenes */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Evita barras de desplazamiento innecesarias en el contenedor raíz */
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Aplicar box-sizing heredado a todos los elementos */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
