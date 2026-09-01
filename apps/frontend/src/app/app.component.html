@@ -1,1 +1,6 @@
+@if (sessionMessage.message()) {
+  <div class="session-banner">
+    {{ sessionMessage.message() }}
+  </div>
+}
 <router-outlet></router-outlet>

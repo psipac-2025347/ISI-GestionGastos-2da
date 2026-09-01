@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 interface Movimiento {
   descripcion: string;
@@ -14,7 +16,7 @@ interface Movimiento {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   sueldoFijo = 0;
   sueldoVariable = 0;
   ingresosExtra = 0;
@@ -26,4 +28,14 @@ export class DashboardComponent {
     { descripcion: 'Sueldo Fijo', fecha: '15 Ago 2026', monto: 3800, tipo: 'ingreso' },
     { descripcion: 'Sueldo Variable', fecha: '14 Ago 2026', monto: 75, tipo: 'gasto' },
   ];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get(`${environment.apiUrl}/auth/me`).subscribe({
+      next: () => {
+
+      },
+    });
+  }
 }
