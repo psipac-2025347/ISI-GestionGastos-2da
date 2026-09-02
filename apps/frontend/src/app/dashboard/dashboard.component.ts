@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { IncomeService } from '../core/services/income.service';
 
 interface Movimiento {
   descripcion: string;
@@ -29,12 +30,21 @@ export class DashboardComponent implements OnInit {
     { descripcion: 'Sueldo Variable', fecha: '14 Ago 2026', monto: 75, tipo: 'gasto' },
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private incomeService: IncomeService
+  ) {}
 
   ngOnInit(): void {
     this.http.get(`${environment.apiUrl}/auth/me`).subscribe({
-      next: () => {
+      next: () => {},
+    });
 
+    this.incomeService.getSummary().subscribe({
+      next: (summary) => {
+        this.sueldoFijo = summary.FIJO;
+        this.sueldoVariable = summary.VARIABLE;
+        this.ingresosExtra = summary.EXTRA;
       },
     });
   }
