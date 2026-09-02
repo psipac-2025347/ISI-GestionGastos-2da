@@ -38,13 +38,22 @@ export class AuthService {
     return this.buildAuthResponse(user);
   }
 
+  async refresh(userId: string, email: string, role: string) {
+  const token = jwt.sign(
+    { sub: userId, email, role },
+    jwtConfig.secret,
+    { expiresIn: jwtConfig.expiresIn } as jwt.SignOptions
+  );
+  return { token };
+}
+
   private buildAuthResponse(user: { id: string; email: string; name: string; role: string }) {
     const token = jwt.sign(
       { sub: user.id, email: user.email, role: user.role },
       jwtConfig.secret,
       { expiresIn: jwtConfig.expiresIn } as jwt.SignOptions
     );
-
+    
     return {
       token,
       user: {

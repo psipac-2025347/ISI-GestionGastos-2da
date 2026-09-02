@@ -1,47 +1,10 @@
-<section class="resumen-header">
-  <h2>RESUMEN</h2>
-</section>
-
-<div class="summary-cards">
-  <div class="summary-card">
-    <img src="images/icons/sueldo-fijo.png" alt="Sueldo Fijo" class="card-icon" />
-    <p class="card-label">SUELDO FIJO</p>
-    <p class="card-value">Q {{ sueldoFijo.toFixed(2) }}</p>
-  </div>
-  <div class="summary-card">
-    <img src="images/icons/Ingreso-Variable.png" alt="Sueldo Variable" class="card-icon variable-icon" />
-    <p class="card-label">SUELDO VARIABLE</p>
-    <p class="card-value">Q {{ sueldoVariable.toFixed(2) }}</p>
-  </div>
-  <div class="summary-card">
-    <img src="images/icons/sueldo-extra.png" alt="Ingresos Extra" class="card-icon" />
-    <p class="card-label">INGRESOS EXTRA</p>
-    <p class="card-value">Q {{ ingresosExtra.toFixed(2) }}</p>
-  </div>
-</div>
-
-<div class="movements-panel">
-  <div class="movements-header">
-    <span>Movimientos Recientes</span>
-    <span class="add-btn">+</span>
-  </div>
-  <div class="movements-list">
-    @for (mov of movimientos; track mov.fecha + mov.descripcion) {
-      <div class="movement-item">
-        <div class="movement-icon" [class.up]="mov.tipo === 'ingreso'" [class.down]="mov.tipo === 'gasto'">
-          {{ mov.tipo === 'ingreso' ? '↑' : '↓' }}
-        </div>
-        <span class="movement-desc">{{ mov.descripcion }}</span>
-        <span class="movement-date">{{ mov.fecha }}</span>
-        <span class="movement-amount" [class.positive]="mov.tipo === 'ingreso'" [class.negative]="mov.tipo === 'gasto'">
-          {{ mov.tipo === 'ingreso' ? '+' : '-' }} Q {{ mov.monto.toFixed(2) }}
-        </span>
-      </div>
-    }
-  </div>
-</div>
-
+<app-finance-summary
+  [sueldoFijo]="sueldoFijo()"
+  [sueldoVariable]="sueldoVariable()"
+  [ingresosExtra]="ingresosExtra()"
+></app-finance-summary>
+<app-finance-movements [movimientos]="movimientos()"></app-finance-movements>
 <footer class="dashboard-footer">
   <span>&copy; 2026 ISI. Todos los derechos reservados.</span>
-  <span class="footer-links"><a href="#">Términos</a> · <a href="#">Privacidad</a></span>
+  <span class="footer-links"><a href="#">Terminos</a> - <a href="#">Privacidad</a></span>
 </footer>

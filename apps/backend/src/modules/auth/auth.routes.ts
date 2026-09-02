@@ -10,5 +10,5 @@ const authController = new AuthController();
 router.post('/register', validate(registerSchema), authController.register.bind(authController));
 router.post('/login', validate(loginSchema), authController.login.bind(authController));
 router.get('/me', authMiddleware, authController.me.bind(authController));
-
+router.post('/refresh', authMiddleware, authController.refresh.bind(authController));
 export default router;

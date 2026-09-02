@@ -1,0 +1,119 @@
+<div class="movements-panel">
+  <div class="movements-header">
+    <span>Movimientos Recientes</span>
+    <div class="header-actions">
+      <img
+        src="/images/icons/sueldo-fijo.png"
+        alt="Expandir"
+        class="expand-btn"
+        (click)="openModal()"
+      />
+      <span class="add-btn" (click)="toggleAddForm()">+</span>
+    </div>
+  </div>
+
+  @if (showAddForm()) {
+    <div class="add-panel">
+      <div class="filter-group">
+        <span class="filter-label">Modulo</span>
+        <div class="filter-buttons">
+          <button class="filter-btn" [class.active]="addModulo() === 'FIJO'" (click)="selectAddModulo('FIJO')">Sueldo Fijo</button>
+          <button class="filter-btn" [class.active]="addModulo() === 'VARIABLE'" (click)="selectAddModulo('VARIABLE')">Sueldo Variable</button>
+          <button class="filter-btn" [class.active]="addModulo() === 'EXTRA'" (click)="selectAddModulo('EXTRA')">Ingreso Extra</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Tipo</span>
+        <div class="filter-buttons">
+          <button class="filter-btn" [class.active]="addTipo() === 'ingreso'" (click)="selectAddTipo('ingreso')">Ingreso</button>
+          <button class="filter-btn" [class.active]="addTipo() === 'gasto'" (click)="selectAddTipo('gasto')">Gasto</button>
+        </div>
+      </div>
+
+      <form class="add-form" (ngSubmit)="submitAdd()">
+        <div class="form-group">
+          <label for="addAmount">Monto</label>
+          <input id="addAmount" type="number" step="0.01" name="addAmount" [(ngModel)]="addAmount" />
+        </div>
+        <div class="form-group">
+          <label for="addDescription">Descripcion (opcional)</label>
+          <input id="addDescription" type="text" name="addDescription" [(ngModel)]="addDescription" />
+        </div>
+        @if (addModulo() === 'VARIABLE') {
+          <p class="hint">Se aplicara un descuento del 5% (IGSS/ISR) sobre el monto ingresado.</p>
+        }
+        @if (addError()) {
+          <div class="error">{{ addError() }}</div>
+        }
+        <button type="submit" class="btn-submit" [disabled]="addLoading()">
+          {{ addLoading() ? 'Guardando...' : 'Registrar' }}
+        </button>
+      </form>
+    </div>
+  }
+
+  <div class="movements-list">
+    @for (mov of preview; track mov.fecha + mov.descripcion + mov.monto) {
+      <div class="movement-item">
+        <div class="movement-icon" [class.up]="mov.tipo === 'ingreso'" [class.down]="mov.tipo === 'gasto'">
+          {{ mov.tipo === 'ingreso' ? '↑' : '↓' }}
+        </div>
+        <span class="movement-desc">{{ mov.descripcion }}</span>
+        <span class="movement-date">{{ mov.fecha }}</span>
+        <span class="movement-amount" [class.positive]="mov.tipo === 'ingreso'" [class.negative]="mov.tipo === 'gasto'">
+          {{ mov.tipo === 'ingreso' ? '+' : '-' }} Q {{ mov.monto.toFixed(2) }}
+        </span>
+      </div>
+    } @empty {
+      <p class="empty-msg">Aún no hay movimientos registrados.</p>
+    }
+  </div>
+</div>
+
+@if (showModal()) {
+  <div class="movements-modal-overlay" (click)="closeModal()">
+    <div class="movements-modal" (click)="$event.stopPropagation()">
+      <div class="movements-modal-header">
+        <h3>Movimientos Recientes</h3>
+        <span class="close-btn" (click)="closeModal()">&times;</span>
+      </div>
+
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">Módulo</span>
+          <div class="filter-buttons">
+            <button class="filter-btn" [class.active]="selectedModulo() === 'FIJO'" (click)="toggleModulo('FIJO')">Sueldo Fijo</button>
+            <button class="filter-btn" [class.active]="selectedModulo() === 'VARIABLE'" (click)="toggleModulo('VARIABLE')">Sueldo Variable</button>
+            <button class="filter-btn" [class.active]="selectedModulo() === 'EXTRA'" (click)="toggleModulo('EXTRA')">Ingreso Extra</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">Tipo</span>
+          <div class="filter-buttons">
+            <button class="filter-btn" [class.active]="selectedTipo() === 'ingreso'" (click)="toggleTipo('ingreso')">Ingreso</button>
+            <button class="filter-btn" [class.active]="selectedTipo() === 'gasto'" (click)="toggleTipo('gasto')">Gasto</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="movements-list modal-list">
+        @for (mov of filtered; track mov.fecha + mov.descripcion + mov.monto) {
+          <div class="movement-item">
+            <div class="movement-icon" [class.up]="mov.tipo === 'ingreso'" [class.down]="mov.tipo === 'gasto'">
+              {{ mov.tipo === 'ingreso' ? '↑' : '↓' }}
+            </div>
+            <span class="movement-desc">{{ mov.descripcion }}</span>
+            <span class="movement-date">{{ mov.fecha }}</span>
+            <span class="movement-amount" [class.positive]="mov.tipo === 'ingreso'" [class.negative]="mov.tipo === 'gasto'">
+              {{ mov.tipo === 'ingreso' ? '+' : '-' }} Q {{ mov.monto.toFixed(2) }}
+            </span>
+          </div>
+        } @empty {
+          <p class="empty-msg">No hay movimientos con esos filtros.</p>
+        }
+      </div>
+    </div>
+  </div>
+}

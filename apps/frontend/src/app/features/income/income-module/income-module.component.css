@@ -1,0 +1,121 @@
+.module-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.movements-column {
+  flex: 1 1 420px;
+}
+.module-container {
+  flex: 1 1 380px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  align-self: flex-start;
+}
+h2 {
+  color: #2E7D32;
+  margin-top: 0;
+}
+.balance-card {
+  background-color: #F5F5F5;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.balance-label {
+  font-weight: 700;
+  color: #2B2B2B;
+  margin: 0;
+}
+.balance-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #2E7D32;
+  margin: 0.5rem 0;
+}
+.balance-status {
+  font-size: 0.85rem;
+  color: #4CAF50;
+  margin: 0;
+}
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.btn-ingresos, .btn-gastos {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+}
+.btn-ingresos {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+.btn-gastos {
+  background-color: #FFEBEE;
+  color: #B71C1C;
+}
+.btn-ingresos small, .btn-gastos small {
+  font-weight: 400;
+  display: block;
+  margin-top: 0.2rem;
+}
+.income-form {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+label {
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  color: #2B2B2B;
+}
+input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.hint {
+  font-size: 0.85rem;
+  color: #9E9E9E;
+  margin-bottom: 1rem;
+}
+.error {
+  color: #B71C1C;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+.success {
+  color: #2E7D32;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+.btn-submit {
+  padding: 0.7rem;
+  background-color: #2E7D32;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

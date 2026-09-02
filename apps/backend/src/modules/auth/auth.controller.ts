@@ -25,4 +25,12 @@ export class AuthController {
   async me(req: AuthRequest, res: Response) {
   res.status(200).json({ user: req.user });
 }
+async refresh(req: AuthRequest, res: Response, next: NextFunction) {
+  try {
+    const result = await authService.refresh(req.user!.sub, req.user!.email, req.user!.role);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
 }
