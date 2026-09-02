@@ -1,50 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { IncomeService } from '../core/services/income.service';
-
-interface Movimiento {
-  descripcion: string;
-  fecha: string;
-  monto: number;
-  tipo: 'ingreso' | 'gasto';
-}
+import { IncomeService, IncomeSummary } from '../core/services/income.service';
+import { FinanceSummaryComponent } from '../shared/finance-summary/finance-summary.component';
+import { FinanceMovementsComponent } from '../shared/finance-movements/finance-movements.component';
+import { mapRecordsToMovimientos, Movimiento } from '../shared/movement.util';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [FinanceSummaryComponent, FinanceMovementsComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  sueldoFijo = 0;
-  sueldoVariable = 0;
-  ingresosExtra = 0;
+  sueldoFijo = signal(0);
+  sueldoVariable = signal(0);
+  ingresosExtra = signal(0);
+  movimientos = signal<Movimiento[]>([]);
 
-  movimientos: Movimiento[] = [
-    { descripcion: 'Sueldo Fijo', fecha: '19 Ago 2026', monto: 150, tipo: 'gasto' },
-    { descripcion: 'Sueldo Variable', fecha: '16 Ago 2026', monto: 50, tipo: 'gasto' },
-    { descripcion: 'Ingreso extra', fecha: '17 Ago 2026', monto: 180, tipo: 'gasto' },
-    { descripcion: 'Sueldo Fijo', fecha: '15 Ago 2026', monto: 3800, tipo: 'ingreso' },
-    { descripcion: 'Sueldo Variable', fecha: '14 Ago 2026', monto: 75, tipo: 'gasto' },
-  ];
-
-  constructor(
-    private http: HttpClient,
-    private incomeService: IncomeService
-  ) {}
+  constructor(private http: HttpClient, private incomeService: IncomeService) {}
 
   ngOnInit(): void {
-    this.http.get(`${environment.apiUrl}/auth/me`).subscribe({
-      next: () => {},
-    });
+    this.http.get(`${environment.apiUrl}/auth/me`).subscribe({ next: () => {} });
+    this.reload();
+  }
 
+  reload(): void {
     this.incomeService.getSummary().subscribe({
-      next: (summary) => {
-        this.sueldoFijo = summary.FIJO;
-        this.sueldoVariable = summary.VARIABLE;
-        this.ingresosExtra = summary.EXTRA;
+      next: (summary: IncomeSummary) => {
+        this.sueldoFijo.set(summary.FIJO);
+        this.sueldoVariable.set(summary.VARIABLE);
+        this.ingresosExtra.set(summary.EXTRA);
+      },
+    });
+    this.incomeService.list().subscribe({
+      next: (records) => {
+        this.movimientos.set(mapRecordsToMovimientos(records));
       },
     });
   }

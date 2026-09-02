@@ -1,7 +1,7 @@
 import { prisma } from '../../config/database.config';
 import { CreateIncomeDto } from './income.dto';
 
-const VARIABLE_DEDUCTION_RATE = 0.05; // 5% IGSS + ISR (pequeño contribuyente)
+const VARIABLE_DEDUCTION_RATE = 0.05;
 
 export class IncomeService {
   async create(userId: string, data: CreateIncomeDto) {
@@ -31,5 +31,12 @@ export class IncomeService {
 
     return summary;
   }
-  
+
+  async list(userId: string) {
+    return prisma.income.findMany({
+      where: { userId },
+      orderBy: { date: 'desc' },
+      take: 10,
+    });
+  }
 }

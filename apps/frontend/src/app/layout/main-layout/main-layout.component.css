@@ -1,60 +1,60 @@
-:host {
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
-}
-
 .app-shell {
   display: flex;
-  width: 100%;
   height: 100vh;
-  background-color: #1b5e20;
-  overflow: hidden;
 }
-
 .app-main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow-y: auto;
-  position: relative;
+  background-color: #1B5E20;
+  min-height: 0;
 }
-
 .topbar {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  padding: 15px 25px 5px 25px;
+  padding: 1.2rem 2rem 0;
 }
-
 .logout-btn {
-  background-color: #b71c1c;
-  color: #ffffff;
+  background-color: #B71C1C;
+  color: white;
   border: none;
-  padding: 10px 24px;
   border-radius: 20px;
-  font-weight: 700;
-  font-size: 1rem;
+  padding: 0.5rem 1.3rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  font-family: 'Open Sans', sans-serif;
+  transition: background-color 0.2s ease;
 }
-
-.logout-btn:hover {
-  background-color: #d32f2f;
-  transform: scale(1.02);
-}
-
+.logout-btn:hover { background-color: #8f1414; }
 .app-content {
   flex: 1;
+  padding: 1.5rem 2rem 2rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+.session-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: column;
-  padding: 10px 30px 20px 30px;
-  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.session-modal {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.session-modal p { color: #2B2B2B; margin-bottom: 1.2rem; }
+.btn-postpone {
+  background-color: #2E7D32;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
 }

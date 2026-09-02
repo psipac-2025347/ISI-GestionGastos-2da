@@ -22,4 +22,13 @@ export class IncomeController {
       next(error);
     }
   }
+
+  async list(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const incomes = await incomeService.list(req.user!.sub);
+      res.status(200).json(incomes);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

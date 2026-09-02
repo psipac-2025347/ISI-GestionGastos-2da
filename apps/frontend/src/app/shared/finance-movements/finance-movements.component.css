@@ -1,0 +1,103 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+.movements-panel {
+  background-color: #ffffff;
+  border: 3px solid #b71c1c;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+.movements-header {
+  background-color: #b71c1c;
+  color: #ffffff;
+  padding: 8px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: 'Open Sans', sans-serif;
+}
+.add-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.movements-list {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ffffff;
+}
+.movement-item {
+  display: grid;
+  grid-template-columns: 42px 32px 1fr 100px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+.movement-item:last-child { border-bottom: none; }
+.movement-item::before {
+  content: '';
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid #4CAF50;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-self: start;
+}
+.movement-item:nth-child(3n+1)::before { background-image: url("/images/icons/sueldo-fijo.png"); }
+.movement-item:nth-child(3n+2)::before { background-image: url("/images/icons/Ingreso-Variable.png"); }
+.movement-item:nth-child(3n+3)::before { background-image: url("/images/icons/sueldo-extra.png"); }
+.movement-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'Open Sans', sans-serif;
+}
+.movement-icon.up { background-color: #e8f5e9; color: #2e7d32; }
+.movement-icon.down { background-color: #ffebee; color: #c62828; }
+.movement-desc {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333333;
+  font-family: 'Open Sans', sans-serif;
+}
+.movement-date {
+  font-size: 0.8rem;
+  color: #757575;
+  text-align: right;
+  font-family: 'Open Sans', sans-serif;
+}
+.movement-amount {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: right;
+  grid-column: 4;
+  font-family: 'Open Sans', sans-serif;
+}
+.movement-amount.positive { color: #2e7d32; }
+.movement-amount.negative { color: #b71c1c; }
+.empty-msg {
+  text-align: center;
+  color: #9E9E9E;
+  padding: 1rem 0;
+}

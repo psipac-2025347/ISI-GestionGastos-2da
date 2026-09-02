@@ -1,0 +1,22 @@
+<div class="movements-panel">
+  <div class="movements-header">
+    <span>Movimientos Recientes</span>
+    <span class="add-btn">+</span>
+  </div>
+  <div class="movements-list">
+    @for (mov of movimientos; track mov.fecha + mov.descripcion + mov.monto) {
+      <div class="movement-item">
+        <div class="movement-icon" [class.up]="mov.tipo === 'ingreso'" [class.down]="mov.tipo === 'gasto'">
+          {{ mov.tipo === 'ingreso' ? '↑' : '↓' }}
+        </div>
+        <span class="movement-desc">{{ mov.descripcion }}</span>
+        <span class="movement-date">{{ mov.fecha }}</span>
+        <span class="movement-amount" [class.positive]="mov.tipo === 'ingreso'" [class.negative]="mov.tipo === 'gasto'">
+          {{ mov.tipo === 'ingreso' ? '+' : '-' }} Q {{ mov.monto.toFixed(2) }}
+        </span>
+      </div>
+    } @empty {
+      <p class="empty-msg">Aún no hay movimientos registrados.</p>
+    }
+  </div>
+</div>

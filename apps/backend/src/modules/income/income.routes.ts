@@ -9,5 +9,6 @@ const incomeController = new IncomeController();
 
 router.post('/', authMiddleware, validate(createIncomeSchema), incomeController.create.bind(incomeController));
 router.get('/summary', authMiddleware, incomeController.summary.bind(incomeController));
+router.get('/', authMiddleware, incomeController.list.bind(incomeController));
 
 export default router;
