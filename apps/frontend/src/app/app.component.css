@@ -1,1 +1,19 @@
-/* Estilos globales del shell de la app, vacío por ahora */
+.session-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #B71C1C;
+  color: white;
+  text-align: center;
+  padding: 0.8rem;
+  font-weight: 600;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
