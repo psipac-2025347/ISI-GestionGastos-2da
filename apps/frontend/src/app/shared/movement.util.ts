@@ -5,6 +5,7 @@ export interface Movimiento {
   fecha: string;
   monto: number;
   tipo: 'ingreso' | 'gasto';
+  modulo: 'FIJO' | 'VARIABLE' | 'EXTRA';
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -21,5 +22,6 @@ export function mapRecordsToMovimientos(records: IncomeRecord[]): Movimiento[] {
     }),
     monto: Number(r.netAmount),
     tipo: 'ingreso' as const,
+    modulo: r.type,
   }));
 }
